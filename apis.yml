@@ -1,0 +1,47 @@
+name: DietlyAPI
+description: >-
+  Food & nutrition data REST API with 4.2M+ foods, calories, macros, 17 micronutrients, barcode lookup, and
+  confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL), EU-hosted, with key-optional read
+  access.
+url: https://dietlyapi.apievangelist.com/apis.yml
+created: '2026-07-17'
+modified: '2026-07-17'
+specificationVersion: '0.21'
+tags:
+  - food
+  - nutrition
+  - barcode
+  - open-food-facts
+  - health
+  - open-data
+apis:
+  - name: DietlyAPI
+    description: >-
+      REST API for food & nutrition data — search, barcode lookup, food-by-id, popular foods, categories, and health
+      probe. Bearer auth optional; read endpoints work anonymously.
+    humanURL: https://www.getdietly.com/api
+    baseURL: https://api.getdietly.com
+    tags:
+      - food
+      - nutrition
+      - barcode
+      - open-food-facts
+      - health
+      - open-data
+    properties:
+      - type: OpenAPI
+        url: https://www.getdietly.com/openapi.json
+      - type: Documentation
+        url: https://www.getdietly.com/api-guide
+      - type: Documentation
+        url: https://www.getdietly.com/api#reference
+      - type: LLMSTxt
+        url: https://www.getdietly.com/llms.txt
+maintainers:
+  - FN: DietlyAPI Support
+    url: https://www.getdietly.com/support?topic=api
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 90
+  at: '2026-07-17T15:29:06.855Z'
