@@ -6,7 +6,7 @@ description: >-
 url: https://raw.githubusercontent.com/api-evangelist/dietlyapi/refs/heads/main/apis.yml
 created: '2026-07-17'
 modified: '2026-07-17'
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 tags:
   - food
   - nutrition
