@@ -4,6 +4,17 @@ description: >-
   confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL), EU-hosted, with key-optional read
   access.
 url: https://raw.githubusercontent.com/api-evangelist/dietlyapi/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.23'
