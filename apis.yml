@@ -19,9 +19,9 @@ created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.23'
 tags:
-  - food
-  - nutrition
-  - barcode
+  - Food
+  - Nutrition
+  - Barcodes
   - open-food-facts
   - Health
   - Open Data
@@ -40,9 +40,9 @@ apis:
     humanURL: https://www.getdietly.com/api
     baseURL: https://api.getdietly.com
     tags:
-      - food
-      - nutrition
-      - barcode
+      - Food
+      - Nutrition
+      - Barcodes
       - open-food-facts
       - Health
       - Open Data
