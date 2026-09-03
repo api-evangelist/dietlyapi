@@ -1,0 +1,39 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/api-guide + https://www.getdietly.com/developers/error-handling/ + https://www.getdietly.com/developers/api-key-security/ + openapi/dietlyapi-openapi.json
+authentication:
+  style: Optional HTTP Bearer API key (Authorization Bearer). All public read endpoints work anonymously at per-IP limits; a key switches to per-account plan limits.
+  key_scopes: Keys are created full-access or read-only in the dashboard; read-only keys can call every GET data endpoint and get 403 elsewhere. Per-key expiry dates and rate caps supported; account key is separate from named access keys.
+  see: authentication/dietlyapi-authentication.yml
+idempotency:
+  coverage: na
+  note: >-
+    The public API surface is read-only — all six operations are GETs (search, barcode, food-by-id,
+    popular, categories, health). There are no mutating operations to protect, so idempotency is not
+    applicable rather than absent. Food submission / AI routes used by Dietly's own apps have
+    separate app authorization and are not part of the public API plans.
+reversibility:
+  coverage: na
+  note: Read-only public surface — no write operations exist, so there is nothing to reverse. Not applicable rather than absent.
+dry_run:
+  coverage: na
+  note: Read-only public surface; anonymous key-free reads serve the try-before-you-buy role.
+pagination:
+  style: limit-only
+  params: limit (1-50 on /search)
+  note: No cursor or offset pagination; search returns a ranked bare array capped by limit.
+response_envelope:
+  note: '/search, /foods/popular return BARE JSON arrays ([] on no match), not {"results":[...]}; /barcode/{code} and /food/{food_id} return one object; missing nutrients are null, never zero.'
+errors:
+  envelope: '{"detail": string} on 401/403/404/429; {"detail": [validation objects]} on 422'
+  see: errors/dietlyapi-problem-types.yml
+rate_limit_signaling:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After]
+  see: rate-limits/dietlyapi-rate-limits.yml
+versioning:
+  style: unversioned paths; adding /v1 yields 401 (auth precedes routing)
+  see: lifecycle/dietlyapi-lifecycle.yml
+tracing:
+  note: No request-id / tracing header documented.
+field_conventions:
+  note: Nutrition fields are per-100g normalized (calories_kcal, protein_g, fat_g, carbs_g, fiber_g, sugar_g, sodium_mg...); source is off | usda | claude; confidence 0-1 ranks trustworthiness; image_thumb_url for lists, image_url for detail.

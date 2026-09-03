@@ -1,0 +1,28 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/developers/api-key-security/ + https://www.getdietly.com/api-guide
+docs: https://www.getdietly.com/developers/api-key-security/
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Optional for the endpoints in this spec. Get a free key instantly at https://www.getdietly.com/account
+    (no card required).
+  sources:
+  - openapi/dietlyapi-openapi.json
+details:
+  optionality: All public read endpoints work anonymously at 30 req/min per IP; sending a Bearer key switches to per-account plan limits and usage reporting.
+  key_scopes:
+    - name: full-access
+      note: Default for server-side use; can call every endpoint the plan allows.
+    - name: read-only
+      note: Can call every GET data endpoint, 403 anywhere else; recommended wherever a key could leak (client-side code, CI logs, notebooks).
+  key_management:
+    - Per-key expiry dates and per-key rate caps set in the dashboard.
+    - Key rotation preserves configuration.
+    - The account key (dashboard /auth/ and /billing/ management) is separate from named access keys; using an access key there returns 403.
+    - TOTP two-factor available on the account.
+  error_behavior: 401 {"detail":"Missing or invalid API key"} is identical for absent header, wrong scheme and unknown key, so keys cannot be probed; auth runs before routing, so unknown paths also 401.

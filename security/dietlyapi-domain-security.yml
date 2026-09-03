@@ -1,0 +1,20 @@
+generated: '2026-09-03'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.getdietly.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  8 18:46:10 2026 GMT
+  hsts: false
+- host: api.getdietly.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  8 18:46:10 2026 GMT
+  hsts: false
+domains:
+- domain: getdietly.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

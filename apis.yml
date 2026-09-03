@@ -1,8 +1,7 @@
 name: DietlyAPI
-description: >-
-  Food & nutrition data REST API with 4.2M+ foods, calories, macros, 17 micronutrients, barcode lookup, and
-  confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL), EU-hosted, with key-optional read
-  access.
+description: Food & nutrition data REST API with 4.7M+ foods, calories, macros, micronutrients, Nutri-Score and
+  EAN/UPC barcode lookup, with confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL) and
+  USDA FoodData Central, EU-hosted, with key-optional read access.
 url: https://raw.githubusercontent.com/api-evangelist/dietlyapi/refs/heads/main/apis.yml
 deliveryModel:
   model: unknown
@@ -16,57 +15,118 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-09-03'
 specificationVersion: '0.23'
 tags:
+- Food
+- Nutrition
+- Barcodes
+- open-food-facts
+- Health
+- Open Data
+tags_raw:
+- food
+- nutrition
+- barcode
+- open-food-facts
+- health
+- open-data
+apis:
+- name: DietlyAPI
+  description: REST API for food & nutrition data — search, barcode lookup, food-by-id, popular foods, categories,
+    and health probe. Bearer auth optional; read endpoints work anonymously.
+  humanURL: https://www.getdietly.com/api
+  baseURL: https://api.getdietly.com
+  tags:
   - Food
   - Nutrition
   - Barcodes
   - open-food-facts
   - Health
   - Open Data
-tags_raw:
+  tags_raw:
   - food
   - nutrition
   - barcode
   - open-food-facts
   - health
   - open-data
-apis:
-  - name: DietlyAPI
-    description: >-
-      REST API for food & nutrition data — search, barcode lookup, food-by-id, popular foods, categories, and health
-      probe. Bearer auth optional; read endpoints work anonymously.
-    humanURL: https://www.getdietly.com/api
-    baseURL: https://api.getdietly.com
-    tags:
-      - Food
-      - Nutrition
-      - Barcodes
-      - open-food-facts
-      - Health
-      - Open Data
-    tags_raw:
-      - food
-      - nutrition
-      - barcode
-      - open-food-facts
-      - health
-      - open-data
-    properties:
-      - type: OpenAPI
-        url: https://www.getdietly.com/openapi.json
-      - type: Documentation
-        url: https://www.getdietly.com/api-guide
-      - type: Documentation
-        url: https://www.getdietly.com/api#reference
-      - type: LLMSTxt
-        url: https://www.getdietly.com/llms.txt
+  properties:
+  - type: OpenAPI
+    url: https://www.getdietly.com/openapi.json
+  - type: Documentation
+    url: https://www.getdietly.com/api-guide
+  - type: Documentation
+    url: https://www.getdietly.com/api#reference
+  - type: LLMsTxt
+    url: https://www.getdietly.com/llms.txt
+  - type: OpenAPI
+    url: openapi/dietlyapi-openapi.json
+  image: https://www.getdietly.com/logo.png
 maintainers:
-  - FN: DietlyAPI Support
-    url: https://www.getdietly.com/support?topic=api
+- FN: DietlyAPI Support
+  url: https://www.getdietly.com/support?topic=api
 generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 90
   at: '2026-07-17T15:29:06.855Z'
+common:
+- type: Website
+  url: https://getdietly.com
+- type: DomainSecurity
+  url: security/dietlyapi-domain-security.yml
+- type: Authentication
+  url: authentication/dietlyapi-authentication.yml
+- type: ChangeLog
+  url: changelog/dietlyapi-changelog.yml
+- type: Lifecycle
+  url: lifecycle/dietlyapi-lifecycle.yml
+- type: StatusPage
+  url: https://www.getdietly.com/uptime
+- type: ErrorCatalog
+  url: errors/dietlyapi-problem-types.yml
+- type: RateLimits
+  url: rate-limits/dietlyapi-rate-limits.yml
+- type: Plans
+  url: plans/dietlyapi-plans-pricing.yml
+- type: Conventions
+  url: conventions/dietlyapi-conventions.yml
+- type: Sandbox
+  url: sandbox/dietlyapi-sandbox.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/dietlyapi-openapi-overlay.yaml
+- type: DataModel
+  url: data-model/dietlyapi-data-model.yml
+- type: Conformance
+  url: conformance/dietlyapi-conformance.yml
+- type: Packages
+  url: packages/dietlyapi-packages.yml
+- type: LLMsTxt
+  url: llms/dietlyapi-llms.txt
+- type: DeveloperPortal
+  url: https://www.getdietly.com/api
+- type: GettingStarted
+  url: https://www.getdietly.com/api-guide
+- type: APIReference
+  url: https://www.getdietly.com/api#reference
+- type: Pricing
+  url: https://www.getdietly.com/api#pricing
+- type: Support
+  url: https://www.getdietly.com/support?topic=api
+- type: Blog
+  url: https://www.getdietly.com/blog/
+- type: SignUp
+  url: https://www.getdietly.com/account?mode=register
+- type: TermsOfService
+  url: https://www.getdietly.com/api-terms
+- type: PrivacyPolicy
+  url: https://www.getdietly.com/privacy
+image: https://www.getdietly.com/logo.png
+x-enrichment:
+  date: '2026-09-03'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v2

@@ -1,0 +1,42 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/api
+plan_count: 4
+currency: EUR
+note: >-
+  Pay-for-traffic pricing; every plan unlocks the full 4.7M-food database. No overage charges on any
+  plan. Launch code DIETLY25 gives 25% off the first Pro/Scale month. Billing via Stripe (moved from
+  Paddle July 2026); cancellation keeps access through the paid period.
+plans:
+  - name: Starter
+    price: 0
+    currency: EUR
+    period: month
+    quota: 30 requests/minute per IP (plus an hourly anti-scraping cap)
+    overage: none
+    limits: shared per-IP limit even with a free key; ~350ms fairness delay; lower priority speed
+    terms: non-commercial use only; instant key, no card; usage dashboard + key rotation; best-effort support
+  - name: Pro
+    price: 27
+    currency: EUR
+    period: month
+    quota: 500 requests/minute per account
+    overage: none
+    limits: priority speed, no fairness delay
+    terms: commercial use license; email support with 24h response; cancel anytime
+  - name: Scale
+    price: 92
+    currency: EUR
+    period: month
+    quota: 3000 requests/minute per account
+    overage: none
+    limits: priority speed, no fairness delay
+    terms: 14-day free trial then EUR 92/month; commercial use license; priority support; cancel anytime
+  - name: Enterprise
+    price: null
+    currency: EUR
+    period: month
+    quota: custom rate limits and quotas
+    overage: none
+    limits: volume pricing from EUR 199/month
+    terms: guaranteed uptime SLA; dedicated onboarding; EU data residency; invoiced billing; custom terms

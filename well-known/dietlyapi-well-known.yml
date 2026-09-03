@@ -1,0 +1,32 @@
+generated: '2026-09-03'
+method: probed
+source: live probes of www.getdietly.com, api.getdietly.com and getdietly.com
+note: >-
+  No well-known documents are served. Every path on www.getdietly.com returns 404; api.getdietly.com
+  answers 401 ({"detail":"Missing or invalid API key"}) for every unknown path because authentication
+  runs before routing (documented behavior), so those are misses, not gated documents; getdietly.com
+  301s to www. No WellKnown/SecurityTxt pointer is wired — recorded absence only.
+hosts:
+  - host: www.getdietly.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404, file: null }
+      - { path: /.well-known/openid-configuration, status: 404, file: null }
+      - { path: /.well-known/oauth-authorization-server, status: 404, file: null }
+      - { path: /.well-known/oauth-protected-resource, status: 404, file: null }
+      - { path: /.well-known/api-catalog, status: 404, file: null }
+      - { path: /.well-known/ai-plugin.json, status: 404, file: null }
+      - { path: /.well-known/agent-card.json, status: 404, file: null }
+      - { path: /.well-known/agent.json, status: 404, file: null }
+  - host: api.getdietly.com
+    documents:
+      - { path: /.well-known/security.txt, status: 401, file: null }
+      - { path: /.well-known/openid-configuration, status: 401, file: null }
+      - { path: /.well-known/oauth-authorization-server, status: 401, file: null }
+      - { path: /.well-known/oauth-protected-resource, status: 401, file: null }
+      - { path: /.well-known/api-catalog, status: 401, file: null }
+      - { path: /.well-known/ai-plugin.json, status: 401, file: null }
+      - { path: /.well-known/agent-card.json, status: 401, file: null }
+      - { path: /.well-known/agent.json, status: 401, file: null }
+  - host: getdietly.com
+    documents:
+      - { path: /.well-known/security.txt, status: 301, file: null }

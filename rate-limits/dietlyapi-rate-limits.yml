@@ -1,0 +1,40 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/api-guide + https://www.getdietly.com/api + https://www.getdietly.com/developers/error-handling/
+limit_count: 4
+limits:
+  - scope: per-IP (anonymous and Starter/free-key traffic)
+    window: 1 minute
+    limit: 30
+    burst: null
+    note: Free keys share the per-IP limit; an additional hourly anti-scraping cap applies; ~350ms fairness delay on anonymous/free reads.
+  - scope: per-IP hourly anti-scraping cap (anonymous/Starter)
+    window: 1 hour
+    limit: null
+    burst: null
+    note: Documented as "an hourly cap that only a scraper would reach"; exact number not published.
+  - scope: per-account (Pro plan, key sent)
+    window: 1 minute
+    limit: 500
+    burst: null
+  - scope: per-account (Scale plan, key sent)
+    window: 1 minute
+    limit: 3000
+    burst: null
+headers:
+  - name: X-RateLimit-Limit
+    meaning: The plan's requests-per-minute allowance (or the key's own cap, if lower).
+  - name: X-RateLimit-Remaining
+    meaning: Requests left in the current minute window (0 on a 429).
+  - name: X-RateLimit-Reset
+    meaning: Seconds until the window resets.
+  - name: Retry-After
+    meaning: Seconds to wait, sent on 429.
+exhaustion:
+  status: 429
+  body: '{"detail": "Rate limit exceeded. Retry in N seconds."}'
+  guidance: Wait for Retry-After, then capped exponential backoff; docs recommend pacing when X-RateLimit-Remaining drops below 5.
+notes: >-
+  Rate-limit headers are reported on authenticated responses; a live anonymous probe of GET /search
+  (2026-09-03, HTTP 200) returned no X-RateLimit-* headers. Per-key rate caps can also be set in the
+  dashboard. Enterprise limits are custom.

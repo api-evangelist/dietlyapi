@@ -1,0 +1,44 @@
+generated: '2026-09-03'
+method: derived
+source: openapi/dietlyapi-openapi.json + https://www.getdietly.com/developers/mcp-server/
+status: candidate
+note: >-
+  Dietly ships NO official MCP server (hosted or packaged). It publishes a build-your-own tutorial
+  ("Build an MCP server for nutrition data", reviewed July 2026) that walks developers through
+  wrapping GET /search and GET /food/{id} in a local Python FastMCP server with two tools,
+  search_foods and get_food. The candidate tool list below is derived from the public OpenAPI
+  operations; the first two tool names follow the provider's own tutorial. No MCPServer pointer is
+  wired in apis.yml because nobody ships a reachable server.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+tools:
+  - name: search_foods
+    description: Fuzzy full-text food search ranked by relevance x confidence. Returns a bare array; [] on no match.
+    operationId: searchFoods
+    method: GET
+    path: /search
+  - name: get_food
+    description: Fetch one food by its stable Dietly ID. 404 when the ID does not exist.
+    operationId: getFood
+    method: GET
+    path: /food/{food_id}
+  - name: barcode_lookup
+    description: EAN-13 / UPC-A barcode lookup returning one fully populated nutrition object.
+    operationId: barcodeLookup
+    method: GET
+    path: /barcode/{code}
+  - name: popular_foods
+    description: Curated list of common foods for discovery / empty-state UIs.
+    operationId: popularFoods
+    method: GET
+    path: /foods/popular
+  - name: list_categories
+    description: All food categories with counts.
+    operationId: listCategories
+    method: GET
+    path: /foods/categories

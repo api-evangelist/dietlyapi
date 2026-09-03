@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the DietlyAPI OpenAPI
+  version: 1.0.0
+x-provenance:
+  generated: '2026-09-03'
+  method: generated
+  source: openapi/dietlyapi-openapi.json + provider docs
+extends: dietlyapi-openapi.json
+actions:
+  - target: $.info
+    description: Link the artifact set this catalog derived from the contract and docs.
+    update:
+      x-artifacts:
+        errors: errors/dietlyapi-problem-types.yml
+        rate-limits: rate-limits/dietlyapi-rate-limits.yml
+        conventions: conventions/dietlyapi-conventions.yml
+        plans: plans/dietlyapi-plans-pricing.yml
+        lifecycle: lifecycle/dietlyapi-lifecycle.yml
+      x-status-page: https://www.getdietly.com/uptime
+      x-changelog: https://www.getdietly.com/api-changelog
+  - target: $.paths['/search'].get
+    description: Document the bare-array envelope and local validation rules the docs stress.
+    update:
+      x-response-envelope: bare JSON array; [] on no match — not {"results":[...]}
+      x-client-validation: q required, min 2 chars; limit 1-50; debounce search boxes to avoid guaranteed 422s
+  - target: $.components.securitySchemes.bearerAuth
+    description: Record key scopes documented at /developers/api-key-security/.
+    update:
+      x-key-scopes: [full-access, read-only]
+      x-key-features: [per-key expiry, per-key rate cap, rotation, separate account key]

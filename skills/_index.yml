@@ -1,0 +1,13 @@
+generated: '2026-09-03'
+method: generated
+source: openapi/dietlyapi-openapi.json + provider docs
+skills:
+  - file: dietlyapi-food-search.md
+    name: dietly-food-search
+    operations: [searchFoods]
+  - file: dietlyapi-barcode-lookup.md
+    name: dietly-barcode-lookup
+    operations: [barcodeLookup, getFood]
+  - file: dietlyapi-food-discovery.md
+    name: dietly-food-discovery
+    operations: [popularFoods, listCategories, health]

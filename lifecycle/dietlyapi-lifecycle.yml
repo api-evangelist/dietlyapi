@@ -1,0 +1,18 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/uptime + https://www.getdietly.com/api-changelog + https://www.getdietly.com/api-guide
+status_page:
+  url: https://www.getdietly.com/uptime
+  note: Availability of api.getdietly.com checked every minute from the origin (health check, search path, service state, content mount); 24h/7d uptime and incident list published.
+versioning:
+  scheme: unversioned paths
+  note: >-
+    No version prefix — /v1/search returns 401 (auth runs before routing) while /search works; the
+    docs call the /v1 prefix out as the classic path mistake. Compatibility is managed through the
+    changelog, which calls out compatibility on every release (19 updates, 0 breaking changes).
+deprecation_policy:
+  published: false
+  note: No deprecation policy or Sunset/Deprecation header documentation found; no deprecated operations in the OpenAPI.
+sla:
+  note: Guaranteed uptime SLA is an Enterprise-plan feature (from EUR 199/month); no public SLA for self-serve plans — status page shows measured uptime instead of promises.
+deprecated_operations: []

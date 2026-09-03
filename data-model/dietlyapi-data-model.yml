@@ -1,0 +1,21 @@
+generated: '2026-09-03'
+method: derived
+source: openapi/dietlyapi-openapi.json + https://www.getdietly.com/api-guide
+entities:
+  - name: FoodResult
+    id_field: id (stable integer Dietly food ID)
+    fields: [id, name, brand, barcode, category, serving_size_g, serving_desc, calories_kcal, protein_g, fat_g, carbs_g, fiber_g, sugar_g, sodium_mg, saturated_fat_g, source, confidence, image_url, image_thumb_url]
+    note: Single-entity model; ~22 documented fields per food. Nutrients are per-100g normalized; unavailable values are null, never 0. source is off (Open Food Facts label data) | usda (USDA FoodData Central) | claude (labeled AI estimates); confidence (0-1) drives result ranking.
+  - name: Category
+    id_field: name
+    fields: [name, count]
+    note: Returned by /foods/categories as a category array with counts.
+relationships:
+  - from: FoodResult
+    to: Category
+    type: belongs_to
+    via: category (string name, not a foreign id)
+  - from: FoodResult
+    to: FoodResult
+    type: lookup_alias
+    via: barcode (EAN-13/UPC-A resolves to one FoodResult via /barcode/{code})

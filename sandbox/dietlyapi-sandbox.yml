@@ -1,0 +1,17 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/api + https://www.getdietly.com/api-guide
+note: >-
+  No separate sandbox environment or test-mode keys. The production read surface itself is the
+  try-out surface: all public read endpoints work with NO key at 30 req/min per IP, so a first
+  request needs no signup. The dashboard hosts an interactive playground (Try the playground,
+  /account#playground) and the API landing page runs a live browser latency card against GET /health.
+  No published test cards/tokens or time simulation — not a payments API.
+environments:
+  - name: production (key-optional)
+    base_url: https://api.getdietly.com
+    auth: none required for reads; Bearer key optional
+playground:
+  url: https://www.getdietly.com/account#playground
+  note: In-dashboard playground; the integration guide links "Try the playground".
+test_values: []

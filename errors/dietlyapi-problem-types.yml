@@ -1,0 +1,40 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/developers/error-handling/ + openapi/dietlyapi-openapi.json
+format: fastapi-detail-envelope
+note: >-
+  Not RFC 9457 problem+json. Every error is a JSON object with a single `detail` member; on 401/403/
+  404/429 `detail` is a string, on 422 it is a LIST of validation objects ({type, loc, msg, input,
+  ctx}) — the docs call this shape change out as the most common integration crash. Authentication
+  runs before routing, so an unknown path returns 401 rather than 404 (e.g. /v1/search).
+problem_types:
+  - status: 401
+    title: Missing or invalid API key
+    body: '{"detail": "Missing or invalid API key"}'
+    causes: Header absent, scheme not Bearer, key does not exist, or the PATH does not exist (auth runs before routing).
+    retry: false
+    remediation: Fix the request; check the path before the key — public read endpoints need no key, so a 401 there is nearly always a path typo.
+  - status: 403
+    title: Key not allowed for this operation
+    body: '{"detail": "This API key is read-only. Use a full-access key for this endpoint."} or {"detail": "Use your account key to manage dashboard settings."}'
+    causes: Read-scope key used on a non-GET, or a named access key used against /auth/ or /billing/ routes.
+    retry: false
+    remediation: Use a full-access key, or the account key for dashboard management.
+  - status: 404
+    title: No such record
+    body: '{"detail": "Barcode not found"}'
+    causes: GET /food/{id} with unknown id or GET /barcode/{code} with no product. Search never 404s — no match is 200 with [].
+    retry: false
+    remediation: Treat as an ordinary empty state, not an error dialog.
+  - status: 422
+    title: Parameter validation failed
+    body: '{"detail": [{"type": "string_too_short", "loc": ["query", "q"], "msg": "...", "input": "a", "ctx": {"min_length": 2}}]}'
+    causes: q shorter than 2 chars, limit outside 1-50, non-integer food id.
+    retry: false
+    remediation: Validate locally before sending — debounce search boxes and require two characters.
+  - status: 429
+    title: Rate limit exceeded
+    body: '{"detail": "Rate limit exceeded. Retry in N seconds."}'
+    causes: Per-IP (30/min anonymous/Starter) or per-account (500/min Pro, 3000/min Scale) minute limit exhausted.
+    retry: true
+    remediation: Honour Retry-After, then capped exponential backoff.

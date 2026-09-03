@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "DietlyAPI",
+    "version": "1.0.0",
+    "description": "DietlyAPI is a food and nutrition API providing access to 4.7M+ indexed foods from a worldwide catalog. It offers fuzzy food search, EAN/UPC barcode lookup, stable food IDs, normalized nutrition fields and confidence-aware ranking.\n\nDietlyAPI is built primarily on Open Food Facts data under ODbL, with Dietly normalization, indexing, plausibility checks and scheduled daily updates. Applications displaying applicable data must provide the required Open Food Facts attribution.\n\nPublic food-read endpoints can be tested without authentication. Anonymous and Starter traffic uses shared per-IP limits and a configured fairness delay. Paid plans provide account-level limits and skip that delay. Pricing, documentation and uptime history are publicly available at https://www.getdietly.com/api, https://www.getdietly.com/api-guide and https://www.getdietly.com/uptime.",
+    "termsOfService": "https://www.getdietly.com/api-terms",
+    "contact": {
+      "name": "DietlyAPI support",
+      "url": "https://www.getdietly.com/support?topic=api"
+    },
+    "license": {
+      "name": "ODbL 1.0 (underlying Open Food Facts data)",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    "x-apisguru-categories": ["food", "open_data"],
+    "x-logo": {
+      "url": "https://www.getdietly.com/logo.png"
+    }
+  },
+  "externalDocs": {
+    "description": "API guide and examples",
+    "url": "https://www.getdietly.com/api-guide"
+  },
+  "servers": [
+    { "url": "https://api.getdietly.com", "description": "Production (EU)" }
+  ],
+  "security": [{}, { "bearerAuth": [] }],
+  "tags": [
+    { "name": "Foods", "description": "Read-only nutrition data from a worldwide catalog. Public reads work without a key at 30 requests/minute per IP; send a Bearer key for account-level paid limits." },
+    { "name": "Meta", "description": "Service health." }
+  ],
+  "paths": {
+    "/search": {
+      "get": {
+        "tags": ["Foods"],
+        "summary": "Search foods",
+        "description": "Fuzzy food and brand search across 4.7M+ indexed foods. Results combine textual relevance with an internal confidence signal to help stronger records appear above sparse matches. Actual response time varies by network, location and workload.",
+        "operationId": "searchFoods",
+        "parameters": [
+          { "name": "q", "in": "query", "required": true, "description": "Search term (min 2 characters)", "schema": { "type": "string", "minLength": 2 }, "example": "greek yogurt" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 50, "default": 5 } },
+          { "name": "source", "in": "query", "description": "Optional source filter: off, usda or claude. Omit this parameter to search all indexed sources.", "schema": { "type": "string", "enum": ["off", "usda", "claude"] } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ranked list of matching foods",
+            "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/FoodResult" } }, "example": [{ "id": 1068319, "name": "Greek yogurt", "brand": null, "barcode": "0855088005245", "category": "Dairies", "serving_size_g": 170.0, "serving_desc": "3/4 cup (170 g)", "calories_kcal": 105.9, "protein_g": 7.6, "fat_g": 3.5, "carbs_g": 12.4, "fiber_g": 0.0, "sugar_g": 10.0, "sodium_mg": 44.1, "saturated_fat_g": 2.4, "cholesterol_mg": 18.0, "potassium_mg": 112.0, "image_url": "https://api.getdietly.com/img?u=...", "image_thumb_url": "https://api.getdietly.com/img?u=...", "source": "off", "confidence": 0.9, "static_url": "food/19/greek-yogurt-2.html" }] } }
+          },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/food/{food_id}": {
+      "get": {
+        "tags": ["Foods"],
+        "summary": "Get a food by ID",
+        "operationId": "getFood",
+        "parameters": [
+          { "name": "food_id", "in": "path", "required": true, "schema": { "type": "integer" }, "example": 1068319 }
+        ],
+        "responses": {
+          "200": { "description": "The food record", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FoodResult" } } } },
+          "404": { "description": "Food not found" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/barcode/{code}": {
+      "get": {
+        "tags": ["Foods"],
+        "summary": "Look up a food by barcode",
+        "description": "Look up a food by EAN-13 or UPC-A barcode.",
+        "operationId": "barcodeLookup",
+        "parameters": [
+          { "name": "code", "in": "path", "required": true, "schema": { "type": "string" }, "example": "0855088005245" }
+        ],
+        "responses": {
+          "200": { "description": "The matching food", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FoodResult" } } } },
+          "404": { "description": "No food with this barcode" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/foods/popular": {
+      "get": {
+        "tags": ["Foods"],
+        "summary": "List popular foods",
+        "description": "Paginated list of popular foods, optionally filtered by category.",
+        "operationId": "popularFoods",
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 500, "default": 100 } },
+          { "name": "offset", "in": "query", "schema": { "type": "integer", "minimum": 0, "default": 0 } },
+          { "name": "category", "in": "query", "description": "Filter by category, e.g. 'Fruits'", "schema": { "type": "string" } },
+          { "name": "has_image", "in": "query", "description": "Only return foods with a product image", "schema": { "type": "boolean", "default": true } }
+        ],
+        "responses": {
+          "200": { "description": "List of foods", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/FoodResult" } } } } },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/foods/categories": {
+      "get": {
+        "tags": ["Foods"],
+        "summary": "List food categories",
+        "description": "All available food categories with item counts.",
+        "operationId": "listCategories",
+        "responses": {
+          "200": {
+            "description": "Categories with counts",
+            "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object", "properties": { "category": { "type": "string" }, "count": { "type": "integer" } } } }, "example": [{ "category": "Snacks", "count": 165922 }] } }
+          },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["Meta"],
+        "summary": "Service health",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "Service status and database size",
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string" }, "foods_in_db": { "type": "integer" } } }, "example": { "status": "ok", "foods_in_db": 4749433 } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Optional for the endpoints in this spec. Get a free key instantly at https://www.getdietly.com/account (no card required)."
+      }
+    },
+    "responses": {
+      "RateLimited": {
+        "description": "Rate limit exceeded. Check the Retry-After and X-RateLimit-* headers.",
+        "headers": {
+          "Retry-After": { "schema": { "type": "integer" }, "description": "Seconds to wait before retrying" },
+          "X-RateLimit-Limit": { "schema": { "type": "integer" } },
+          "X-RateLimit-Remaining": { "schema": { "type": "integer" } },
+          "X-RateLimit-Reset": { "schema": { "type": "integer" } }
+        }
+      }
+    },
+    "schemas": {
+      "FoodResult": {
+        "type": "object",
+        "description": "A single food record. Every nutrient value is expressed PER 100 GRAMS of the food, not per serving. To report a portion, multiply by grams and divide by 100 — e.g. an olive oil returning calories_kcal 831 is 831 kcal per 100 g, so a 13 g tablespoon is 108 kcal. Use serving_size_g to translate a serving into grams, but never treat the nutrient values as a per-serving figure.",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "brand": { "type": "string", "nullable": true },
+          "barcode": { "type": "string", "nullable": true },
+          "category": { "type": "string", "nullable": true },
+          "serving_size_g": { "type": "number", "nullable": true, "description": "Grams in one manufacturer serving, where the source declares one. Descriptive only: the nutrient fields below are not scaled to it. Null on roughly a third of records." },
+          "serving_desc": { "type": "string", "nullable": true, "description": "Human-readable label for one serving, e.g. '3/4 cup (170 g)'." },
+          "calories_kcal": { "type": "number", "nullable": true, "description": "Energy in kcal per 100 g" },
+          "protein_g": { "type": "number", "nullable": true, "description": "Protein in grams per 100 g" },
+          "fat_g": { "type": "number", "nullable": true, "description": "Total fat in grams per 100 g" },
+          "carbs_g": { "type": "number", "nullable": true, "description": "Carbohydrate in grams per 100 g" },
+          "fiber_g": { "type": "number", "nullable": true, "description": "Fibre in grams per 100 g" },
+          "sugar_g": { "type": "number", "nullable": true, "description": "Sugars in grams per 100 g" },
+          "sodium_mg": { "type": "number", "nullable": true, "description": "Sodium in mg per 100 g" },
+          "saturated_fat_g": { "type": "number", "nullable": true, "description": "Saturated fat in grams per 100 g" },
+          "cholesterol_mg": { "type": "number", "nullable": true, "description": "Cholesterol in mg per 100 g" },
+          "potassium_mg": { "type": "number", "nullable": true, "description": "Potassium in mg per 100 g" },
+          "image_url": { "type": "string", "nullable": true },
+          "image_thumb_url": { "type": "string", "nullable": true },
+          "source": { "type": "string", "description": "Data source: off (Open Food Facts), usda (USDA FoodData Central), claude (labeled AI estimate) or community" },
+          "confidence": { "type": "number", "description": "Data confidence score, 0–1" },
+          "static_url": { "type": "string", "nullable": true, "description": "Path of the human-readable page on www.getdietly.com" }
+        },
+        "example": {
+          "id": 1068319,
+          "name": "Greek yogurt",
+          "brand": null,
+          "barcode": "0855088005245",
+          "category": "Dairies",
+          "serving_size_g": 170.0,
+          "serving_desc": "3/4 cup (170 g)",
+          "calories_kcal": 105.9,
+          "protein_g": 7.6,
+          "fat_g": 3.5,
+          "carbs_g": 12.4,
+          "fiber_g": 0.0,
+          "sugar_g": 10.0,
+          "sodium_mg": 44.1,
+          "saturated_fat_g": 2.4,
+          "cholesterol_mg": 18.0,
+          "potassium_mg": 112.0,
+          "image_url": "https://api.getdietly.com/img?u=...",
+          "image_thumb_url": "https://api.getdietly.com/img?u=...",
+          "source": "off",
+          "confidence": 0.9,
+          "static_url": "food/19/greek-yogurt-2.html"
+        }
+      }
+    }
+  }
+}

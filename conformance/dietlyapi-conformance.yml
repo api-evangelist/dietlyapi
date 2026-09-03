@@ -1,0 +1,29 @@
+generated: '2026-09-03'
+method: derived
+source: openapi/dietlyapi-openapi.json + https://www.getdietly.com/developers/error-handling/ + https://www.getdietly.com/api
+standards:
+  - id: rfc9457
+    conforms: false
+    evidence: Errors use a FastAPI-style {"detail" ...} envelope with content-type application/json, not application/problem+json (documented at /developers/error-handling/).
+  - id: oauth2
+    conforms: false
+    evidence: Auth is optional static Bearer API keys (openapi components.securitySchemes.bearerAuth, type http/bearer); no OAuth flows, no /.well-known/oauth-authorization-server (401/404 on probe 2026-09-03).
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on www and 401 on api host (probed 2026-09-03).
+  - id: rate-limit-headers
+    conforms: true
+    evidence: Documented X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset plus Retry-After on 429 (https://www.getdietly.com/api-guide, Limits and retries); draft-conventional X-RateLimit-* family, not the newer RateLimit-Policy header.
+  - id: pagination
+    conforms: false
+    evidence: limit-only (1-50) result capping on /search; no cursor/offset pagination.
+  - id: gdpr-posture
+    conforms: null
+    evidence: Marketing claim "EU-hosted and GDPR-friendly" (origin in Nuremberg, Germany; no personal data required for reads) at https://www.getdietly.com/api; no certification or trust-center document published, so recorded as a claim, not verified conformance.
+domain_standards:
+  note: >-
+    No API-level domain standard is declared in the contract. The DATA carries domain licensing/
+    provenance rather than a wire standard - Open Food Facts under ODbL (attribution required on
+    every plan) and USDA FoodData Central (public domain), stated in info.description and the API
+    terms. Nutrition data has no dominant machine-readable API standard to conform to; reward-only
+    check left unclaimed.

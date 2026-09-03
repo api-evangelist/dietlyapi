@@ -1,0 +1,30 @@
+generated: '2026-09-03'
+method: searched
+source: https://www.getdietly.com/api-changelog
+scheme: dated plain-language releases with per-release compatibility callouts
+summary: 19 documented updates, 0 breaking changes; every entry states "No API behavior change" or the compatibility impact
+entries:
+  - date: '2026-07-15'
+    title: Billing moved from Paddle to Stripe
+    breaking: false
+    highlights: Stripe-hosted checkout from the dashboard; prices unchanged (Pro EUR 27/month, Scale 14 free days then EUR 92/month); Dietly is seller of record; refunds via Stripe.
+  - date: '2026-07-15'
+    title: Credential and sign-in security audit
+    breaking: false
+    highlights: Password/reset-code/key-rotation protections confirmed; persistent dashboard sign-in now discloses local API-key storage; automated release scanning for secret shapes.
+  - date: '2026-07-15'
+    title: Edge security and cache-isolation audit
+    breaking: false
+    highlights: Verified HTTPS redirects, certificate trust, API CORS; reproduced anonymous search-cache hit on a request carrying Authorization; recorded missing HSTS.
+  - date: '2026-07-15'
+    title: Verified production checkout catalog
+    breaking: false
+    highlights: Pro EUR 27/month and Scale EUR 92/month (14-day trial) confirmed via read-only pricing preview; catalog drift is a production compatibility failure.
+  - date: '2026-07-15'
+    title: Paid-launch legal release safety
+    breaking: false
+    highlights: API Terms, app Terms and Privacy deploy, hash, smoke-test, back up and roll back as one legal release set.
+  - date: '2026-07-15'
+    title: Measured performance, without fixed promises
+    breaking: false
+    highlights: Replaced fixed latency claims with origin-probe and customer-path measurements; removed unsupported competitor latency ranges.

@@ -1,0 +1,11 @@
+generated: '2026-09-03'
+method: searched
+source: registry.npmjs.org search + pypi.org/pypi probes + https://www.getdietly.com/integrations
+package_count: 0
+packages: []
+note: >-
+  No first-party client libraries found. npm search for "dietly" returns nothing; pypi.org/pypi/
+  {dietly, dietlyapi, dietly-api}/json all 404 (probed 2026-09-03). No GitHub organization found.
+  Instead of SDKs the provider ships copy-paste HTTP snippets for JavaScript, Node.js, Next.js,
+  Python, React Native, Flutter, PHP and AI assistants on https://www.getdietly.com/integrations —
+  all calling GET /search directly. No SDKs pointer wired.
