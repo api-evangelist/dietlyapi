@@ -1,0 +1,14 @@
+{
+  "repo": "dietlyapi",
+  "feeds": [
+    {
+      "source": "https://www.getdietly.com/support?topic=api",
+      "feed_url": "https://www.getdietly.com/support?topic=api",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-09-06T19:17:18Z"
+}
