@@ -40,6 +40,8 @@ apis:
   humanURL: https://www.getdietly.com/api
   baseURL: https://api.getdietly.com
   tags:
+  - Food
+  tags_raw:
   - Foods
   properties:
   - type: OpenAPI
