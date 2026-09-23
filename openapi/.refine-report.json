@@ -1,0 +1,22 @@
+{
+  "provider": "dietlyapi",
+  "sources": [
+    "_original/dietlyapi-openapi.json"
+  ],
+  "outputs": [
+    "dietlyapi-foods-api-openapi.yml",
+    "dietlyapi-meta-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "dietlyapi-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dietlyapi-foods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dietlyapi-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

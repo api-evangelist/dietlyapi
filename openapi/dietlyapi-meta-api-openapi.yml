@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Dietly Meta API
+  version: 1.0.0
+  description: DietlyAPI is a food and nutrition API providing access to 4.7M+ indexed foods from a worldwide catalog.
+  termsOfService: https://www.getdietly.com/api-terms
+  contact:
+    name: DietlyAPI support
+    url: https://www.getdietly.com/support?topic=api
+  license:
+    name: ODbL 1.0 (underlying Open Food Facts data)
+    url: https://opendatacommons.org/licenses/odbl/1-0/
+  x-apisguru-categories:
+  - food
+  - open_data
+  x-logo:
+    url: https://www.getdietly.com/logo.png
+servers:
+- url: https://api.getdietly.com
+  description: Production (EU)
+security:
+- {}
+- bearerAuth: []
+tags:
+- name: Meta
+  description: Service health.
+paths:
+  /health:
+    get:
+      tags:
+      - Meta
+      summary: Service health
+      operationId: health
+      responses:
+        '200':
+          description: Service status and database size
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  foods_in_db:
+                    type: integer
+              example:
+                status: ok
+                foods_in_db: 4749433
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Optional for the endpoints in this spec. Get a free key instantly at https://www.getdietly.com/account (no card required).
+externalDocs:
+  description: API guide and examples
+  url: https://www.getdietly.com/api-guide
