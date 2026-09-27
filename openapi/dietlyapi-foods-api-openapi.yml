@@ -210,23 +210,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Rate limit exceeded. Check the Retry-After and X-RateLimit-* headers.
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying
-        X-RateLimit-Limit:
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          schema:
-            type: integer
   schemas:
     FoodResult:
       type: object
@@ -350,6 +333,23 @@ components:
         source: 'off'
         confidence: 0.9
         static_url: food/19/greek-yogurt-2.html
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Check the Retry-After and X-RateLimit-* headers.
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          schema:
+            type: integer
   securitySchemes:
     bearerAuth:
       type: http
