@@ -1,4 +1,4 @@
-# dietlyapi
+# DietlyAPI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Food &amp; nutrition data REST API with 4.2M+ foods, calories, macros, 17 micronutrients, barcode lookup, and confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL), EU-hosted, with key-optional read access.
+Food & nutrition data REST API with 4.7M+ foods, calories, macros, micronutrients, Nutri-Score and EAN/UPC barcode lookup, with confidence-ranked full-text search. Data primarily from Open Food Facts (ODbL) and USDA FoodData Central, EU-hosted, with key-optional read access.
+
+**Areas:** Food · Nutrition · Barcodes · open-food-facts · Health · Open Data
+
+## DietlyAPI on APIs.io
+
+Everything profiled for DietlyAPI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dietlyapi/](https://apis.io/providers/dietlyapi/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [DietlyAPI Foods API](https://apis.io/apis/dietlyapi/dietlyapi-foods-api/) — Read-only nutrition data from a worldwide catalog. Public reads work without a key at 30 requests/minute per IP; send a Bearer key for account-level paid…
+- [DietlyAPI Meta API](https://apis.io/apis/dietlyapi/dietlyapi-meta-api/) — Service health.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [dietlyapi-mcp.yml](https://apis.io/servers/dietlyapi/dietlyapi-mcp-yml/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Dietlyapi Openapi Overlay](https://apis.io/overlays/dietlyapi/dietlyapi-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Dietlyapi Authentication](https://apis.io/security/dietlyapi/dietlyapi-authentication/)
+- [Dietlyapi Domain Security](https://apis.io/security/dietlyapi/dietlyapi-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Dietlyapi Plans Pricing](https://apis.io/plans/dietlyapi/dietlyapi-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Dietlyapi Rate Limits](https://apis.io/rate-limits/dietlyapi/dietlyapi-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://getdietly.com)
+- [Getting started](https://www.getdietly.com/api-guide)
+- [API reference](https://www.getdietly.com/api#reference)
+- [Pricing](https://www.getdietly.com/api#pricing)
+- [Sign up](https://www.getdietly.com/account?mode=register)
+- [Support](https://www.getdietly.com/support?topic=api)
+- [Blog](https://www.getdietly.com/blog/)
+- [Terms of service](https://www.getdietly.com/api-terms)
+- [Privacy policy](https://www.getdietly.com/privacy)
+- [Status](https://www.getdietly.com/uptime)
+
+## API Evangelist rating
+
+**Kin Score 57.5** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 67.9 |
+| Contract quality | 49.3 |
+| Contract governance | 4.5 |
+| Operational transparency | 63.2 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 76.3 |
+
+**Agent readiness 36.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dietlyapi/](https://apis.io/providers/dietlyapi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DietlyAPI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dietlyapi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
