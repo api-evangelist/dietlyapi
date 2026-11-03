@@ -41,7 +41,7 @@ plans:
     limits: volume pricing from EUR 199/month
     terms: guaranteed uptime SLA; dedicated onboarding; EU data residency; invoiced billing; custom terms
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
